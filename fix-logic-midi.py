@@ -1,4 +1,5 @@
 from mido import MidiFile, Message, MidiTrack, MetaMessage
+from sys import argv
 
 def fix_zero_length_notes(mid, maxmsg=10):
     for t, track in enumerate(mid.tracks):
@@ -29,6 +30,9 @@ def fix_zero_length_notes(mid, maxmsg=10):
         # replace fixed track
         mid.tracks[t] = MidiTrack(out)
 
-mid = MidiFile('input.mid')
+filename = 'input.mid'
+if len(argv) >= 2:
+    filename = argv[1]
+mid = MidiFile(filename)
 fix_zero_length_notes(mid, 0)
-mid.save('output.mid')
+mid.save('fixed-' + filename)

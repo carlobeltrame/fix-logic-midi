@@ -5,5 +5,7 @@ services:
     image: "python:3"
     volumes:
       - ".:/usr/src/app"
+    environment:
+      - "INPUT=${INPUT}"
     working_dir: "/usr/src/app"
-    command: bash -c "pip install --no-cache-dir -r requirements.txt && python fix-logic-midi.py"
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && python fix-logic-midi.py ${INPUT}"
